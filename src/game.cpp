@@ -1,4 +1,3 @@
-// Update for 2nd snake
 #include "game.h"
 #include <iostream>
 #include "SDL.h"
