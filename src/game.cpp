@@ -3,7 +3,8 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height),
+    : snake(grid_width, grid_height, static_cast<float>(0), static_cast<float>(0), Snake::Direction::kUp),
+      snake2(grid_width, grid_height, static_cast<float>(grid_width), static_cast<float>(grid_height), Snake::Direction::kDown),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
       random_h(0, static_cast<int>(grid_height)) {
