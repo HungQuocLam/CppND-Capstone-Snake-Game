@@ -7,13 +7,15 @@
 class Snake {
  public:
   enum class Direction { kUp, kDown, kLeft, kRight };
-
-  Snake(int grid_width, int grid_height, float head_x, float heady_y, Direction direction)
+  enum class Player { kNULL, kPlayerOne, kPlayerTwo };
+  Snake(int grid_width, int grid_height, float head_x, float heady_y, Direction direction, Player player)
       : grid_width(grid_width),
         grid_height(grid_height),
         head_x(head_x),
         head_y(heady_y),
-        direction(direction) {}
+        direction(direction),
+        player(player),
+        obstacle_hit(false) {}
 
   void Update();
 
@@ -21,6 +23,8 @@ class Snake {
   bool SnakeCell(int x, int y);
 
   Direction direction ;
+  Player player;
+  bool obstacle_hit;
 
   float speed{0.1f};
   int size{1};

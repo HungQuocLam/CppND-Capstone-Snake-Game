@@ -15,8 +15,24 @@ int main() {
   Controller controller;
   Game game(kGridWidth, kGridHeight);
   game.Run(controller, renderer, kMsPerFrame);
+  game.Gamewinner();
   std::cout << "Game has terminated successfully!\n";
-  std::cout << "Score: " << game.GetScore() << "\n";
-  std::cout << "Size: " << game.GetSize() << "\n";
+  std::cout << "Score Snake 1: " << game.GetScore(Snake::Player::kPlayerOne) << "\n";
+  std::cout << "Size Snake 1: " << game.GetSize(Snake::Player::kPlayerOne) << "\n";
+  std::cout << "Score Snake 2: " << game.GetScore(Snake::Player::kPlayerTwo) << "\n";
+  std::cout << "Size Snake 2: " << game.GetSize(Snake::Player::kPlayerTwo) << "\n";
+
+  if (Snake::Player::kPlayerOne == game.winner)
+  {
+    std::cout << " Congratulation to Player 1 - You are the winner!\n";
+  }
+  else if (Snake::Player::kPlayerTwo == game.winner)
+  {
+    std::cout << " Congratulation to Player 2 - You are the winner!\n";
+  }
+  else 
+  {
+    std::cout << " Congratulation to both players - Game is draw!\n";
+  }
   return 0;
 }

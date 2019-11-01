@@ -3,11 +3,13 @@
 #include "SDL.h"
 
 Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height, static_cast<float>(0), static_cast<float>(0), Snake::Direction::kUp),
-      snake2(grid_width, grid_height, static_cast<float>(grid_width), static_cast<float>(grid_height), Snake::Direction::kDown),
+    : snake(grid_width, grid_height, static_cast<float>(0), static_cast<float>(0), Snake::Direction::kUp, Snake::Player::kPlayerOne),
+      snake2(grid_width, grid_height, static_cast<float>(grid_width/2), static_cast<float>(grid_height/2), Snake::Direction::kDown, Snake::Player::kPlayerTwo),
       engine(dev()),
       random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)) {
+      random_h(0, static_cast<int>(grid_height)),
+      winner(Snake::Player::kNULL) 
+{
   PlaceFood();
 }
 
@@ -24,9 +26,9 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
-    controller.HandleInput(running, snake);
+    controller.HandleInput(running, snake, snake2);
     Update();
-    renderer.Render(snake, food);
+    renderer.Render(snake, snake2, food);
 
     frame_end = SDL_GetTicks();
 
@@ -37,7 +39,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 
     // After every second, update the window title.
     if (frame_end - title_timestamp >= 1000) {
-      renderer.UpdateWindowTitle(score, frame_count);
+      renderer.UpdateWindowTitle(score, score2, frame_count);
       frame_count = 0;
       title_timestamp = frame_end;
     }
@@ -67,22 +69,76 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  if (!snake.alive) return;
+  if (!snake.alive || !snake.alive) {
+    GameOver = true; 
+    return;
+  }
 
   snake.Update();
+  snake2.Update();
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);
 
-  // Check if there's food over here
+  int new_x2 = static_cast<int>(snake2.head_x);
+  int new_y2 = static_cast<int>(snake2.head_y);
+
+  // Check if there's food over 1st snake 
   if (food.x == new_x && food.y == new_y) {
     score++;
     PlaceFood();
     // Grow snake and increase speed.
     snake.GrowBody();
-    snake.speed += 0.02;
+    snake.speed += 0.01;
+  }
+  // Or 2nd snake
+  else if (food.x == new_x2 && food.y == new_y2) {
+    score2++;
+    PlaceFood();
+    // Grow snake and increase speed.
+    snake2.GrowBody();
+    snake2.speed += 0.01;
   }
 }
 
-int Game::GetScore() const { return score; }
-int Game::GetSize() const { return snake.size; }
+int Game::GetScore(Snake::Player player) const { 
+  if (Snake::Player::kPlayerOne == player)
+    return score;   
+  else
+    return score2;  
+}
+
+int Game::GetSize(Snake::Player player) const { 
+  if (Snake::Player::kPlayerOne == player)
+    return snake.size;
+  else
+    return snake2.size;
+}
+
+void Game::Gamewinner()
+{
+  if (true == snake.obstacle_hit)
+  { 
+    winner = Snake::Player::kPlayerTwo; 
+  }
+  else if (true == snake2.obstacle_hit)
+  { 
+    winner = Snake::Player::kPlayerOne; 
+  }
+  else
+  {
+    // Check score
+    if (score > score2)
+    {
+      winner = Snake::Player::kPlayerOne; 
+    }
+    else if (score < score2)
+    {
+      winner = Snake::Player::kPlayerTwo; 
+    }
+    else 
+    {
+      winner = Snake::Player::kNULL;
+    }
+  }
+}
