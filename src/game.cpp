@@ -23,6 +23,11 @@ void Game::Run(Controller const &controller, Renderer &renderer,
   bool running = true;
 
   while (running) {
+    if (!snake.alive || !snake2.alive) {
+      if (!snake.alive) std::cout << "Snake Player 1 died \n";
+      else if (!snake2.alive) std::cout << "Snake Player 2 died\n";
+      return;
+    }
     frame_start = SDL_GetTicks();
 
     // Input, Update, Render - the main game loop.
@@ -69,12 +74,10 @@ void Game::PlaceFood() {
 }
 
 void Game::Update() {
-  if (!snake.alive || !snake.alive) {
-    GameOver = true; 
-    return;
-  }
 
+  // 1st snake update
   snake.Update();
+  // 2nd snake update
   snake2.Update();
 
   int new_x = static_cast<int>(snake.head_x);
@@ -99,6 +102,23 @@ void Game::Update() {
     snake2.GrowBody();
     snake2.speed += 0.01;
   }
+
+  // 1st snake die
+  for(const auto item: snake.BodyPosition()){
+    if(new_x == item.x && new_y == item.y && snake.alive){
+      snake.alive = false;
+      winner = Snake::Player::kPlayerTwo;
+
+    }
+  }
+  // 2nd snake die
+  for(const auto item: snake2.BodyPosition()){
+    if(new_x2 == item.x && new_y2 == item.y && snake.alive){
+      snake2.alive = false;
+      winner = Snake::Player::kPlayerOne;     
+    }
+  }
+
 }
 
 int Game::GetScore(Snake::Player player) const { 
@@ -117,11 +137,12 @@ int Game::GetSize(Snake::Player player) const {
 
 void Game::Gamewinner()
 {
-  if (true == snake.obstacle_hit)
+
+  if (false == snake.alive)
   { 
     winner = Snake::Player::kPlayerTwo; 
   }
-  else if (true == snake2.obstacle_hit)
+  else if (false == snake2.alive)
   { 
     winner = Snake::Player::kPlayerOne; 
   }
