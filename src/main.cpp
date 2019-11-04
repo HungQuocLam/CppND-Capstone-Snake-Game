@@ -4,6 +4,8 @@
 #include "game.h"
 #include "renderer.h"
 
+#define NUMB_OF_BOMB 5
+
 int main() {
   constexpr std::size_t kFramesPerSecond{60};
   constexpr std::size_t kMsPerFrame{1000 / kFramesPerSecond};
@@ -14,7 +16,7 @@ int main() {
 
   Renderer renderer(kScreenWidth, kScreenHeight, kGridWidth, kGridHeight);
   Controller controller;
-  Game game(kGridWidth, kGridHeight);
+  Game game(kGridWidth, kGridHeight, NUMB_OF_BOMB);
   game.Run(controller, renderer, kMsPerFrame);
   game.Gamewinner();
 

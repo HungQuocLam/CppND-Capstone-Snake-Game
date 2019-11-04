@@ -45,6 +45,15 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "bomb_matrix.h": "c",
+        "snake.h": "c",
+        "chrono": "cpp",
+        "ctime": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "ratio": "cpp",
+        "mutex": "cpp",
+        "thread": "cpp"
     }
 }

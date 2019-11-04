@@ -8,10 +8,14 @@
 #include "controller.h"
 #include "renderer.h"
 #include "snake.h"
+#include "bomb_matrix.h"
+#include "elapse_timer.h"
+
+#define TIMER_ELAPSE 5 // 5 seconds after hitting bomb
 
 class Game {
  public:
-  Game(std::size_t grid_width, std::size_t grid_height);
+  Game(std::size_t grid_width, std::size_t grid_height, int bomb_num);
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
   
@@ -24,7 +28,12 @@ class Game {
   Snake snake;
   Snake snake2;
 
+  Bomb_matrix bomb_m; 
+
   SDL_Point food;
+
+  Elapse_timer timer;
+  Elapse_timer timer2;
 
   std::random_device dev;
   std::mt19937 engine;

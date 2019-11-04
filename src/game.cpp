@@ -2,13 +2,14 @@
 #include <iostream>
 #include "SDL.h"
 
-Game::Game(std::size_t grid_width, std::size_t grid_height)
-    : snake(grid_width, grid_height, static_cast<float>(0), static_cast<float>(0), Snake::Direction::kUp, Snake::Player::kPlayerOne),
+Game::Game(std::size_t grid_width, std::size_t grid_height, int bomb_num)
+    : snake(grid_width, grid_height, static_cast<float>(grid_width/2), static_cast<float>(grid_height/2), Snake::Direction::kUp, Snake::Player::kPlayerOne),
       snake2(grid_width, grid_height, static_cast<float>(grid_width/2), static_cast<float>(grid_height/2), Snake::Direction::kDown, Snake::Player::kPlayerTwo),
       engine(dev()),
-      random_w(0, static_cast<int>(grid_width)),
-      random_h(0, static_cast<int>(grid_height)),
-      winner(Snake::Player::kNULL) 
+      random_w(0, static_cast<int>(grid_width)-1),
+      random_h(0, static_cast<int>(grid_height)-1),
+      winner(Snake::Player::kNULL),
+      bomb_m(static_cast<int>(grid_width), static_cast<int>(grid_height), bomb_num) 
 {
   PlaceFood();
 }
@@ -28,7 +29,7 @@ void Game::Run(Controller const &controller, Renderer &renderer,
     // Input, Update, Render - the main game loop.
     controller.HandleInput(running, snake, snake2);
     Update();
-    renderer.Render(snake, snake2, food);
+    renderer.Render(snake, snake2, bomb_m, food);
 
     frame_end = SDL_GetTicks();
 
@@ -54,28 +55,82 @@ void Game::Run(Controller const &controller, Renderer &renderer,
 }
 
 void Game::PlaceFood() {
-  int x, y;
+  int x, y; 
+  bool bomb_check{false};
   while (true) {
     x = random_w(engine);
     y = random_h(engine);
-    // Check that the location is not occupied by a snake item before placing
+    // Check that the location is not occupied by a snake or bomb item before placing
     // food.
-    if (!snake.SnakeCell(x, y)) {
+    for (SDL_Point const &point : bomb_m.position){
+      if (x == point.x && y == point.y){
+        bomb_check = false;
+        break;
+      }
+      else bomb_check = true;
+    }
+    if (!snake.SnakeCell(x, y) && !snake2.SnakeCell(x, y) && bomb_check) {
       food.x = x;
       food.y = y;
-      return;
+      break;
     }
   }
+  std::cout << "food " << "(" << food.x << "," << food.y << ")" << "\n";
 }
 
 void Game::Update() {
   if (!snake.alive || !snake2.alive) {
     return;
   }
-  // 1st snake update
-  snake.Update();
-  // 2nd snake update
-  snake2.Update();
+
+  if (snake.get_moving()){
+    // 1st snake update
+    snake.Update();
+  }
+  if (snake2.get_moving()){
+    // 2nd snake update
+    snake2.Update();
+  }
+
+  // check if snake1 hit the bombs
+  if (!snake.get_moving()){
+    if (static_cast<int>(timer.elapsedSeconds()) > TIMER_ELAPSE){
+      snake.set_moving(true);
+      timer.stop(); 
+      std::cout << "Timer stoped" << "\n";  
+    }  
+  }
+  else{
+    for (SDL_Point const &point : bomb_m.position){
+      // snake hit bomb 
+      if (snake.SnakeCell(point.x, point.y) && snake.hit_pos.x != point.x && snake.hit_pos.y != point.y){
+        snake.set_moving(false);
+        timer.start(); 
+        snake.hit_pos = point;
+        std::cout << "Timer started" << "\n";
+      }
+    }
+  }
+  
+  // check if snake2 hit the bombs
+  if (!snake2.get_moving()){
+    if (static_cast<int>(timer2.elapsedSeconds()) > TIMER_ELAPSE){
+      snake2.set_moving(true);
+      timer2.stop(); 
+      std::cout << "Timer stoped" << "\n";  
+    }  
+  }
+  else{
+    for (SDL_Point const &point : bomb_m.position){
+      // snake hit bomb 
+      if (snake2.SnakeCell(point.x, point.y) && snake2.hit_pos.x != point.x && snake2.hit_pos.y != point.y){
+        snake2.set_moving(false);
+        timer2.start(); 
+        snake2.hit_pos = point;
+        std::cout << "Timer started" << "\n";
+      }
+    }
+  }
 
   int new_x = static_cast<int>(snake.head_x);
   int new_y = static_cast<int>(snake.head_y);

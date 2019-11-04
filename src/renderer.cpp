@@ -38,7 +38,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const snake, Snake const snake2, SDL_Point const &food) {
+void Renderer::Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, SDL_Point const &food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -91,6 +91,15 @@ void Renderer::Render(Snake const snake, Snake const snake2, SDL_Point const &fo
     SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x00, 0x00, 0xFF);
   }
   SDL_RenderFillRect(sdl_renderer, &block);
+
+
+    // Render bomb matrix
+  SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0x7F, 0x50, 0xFF);
+  for (SDL_Point const &point : bomb_m.position) {
+    block.x = point.x * block.w;
+    block.y = point.y * block.h;
+    SDL_RenderFillRect(sdl_renderer, &block);
+  }
 
   // Update Screen
   SDL_RenderPresent(sdl_renderer);

@@ -123,6 +123,33 @@ SnakeGame/fast:
 	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/build
 .PHONY : SnakeGame/fast
 
+src/bomb_matrix.o: src/bomb_matrix.cpp.o
+
+.PHONY : src/bomb_matrix.o
+
+# target to build an object file
+src/bomb_matrix.cpp.o:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/bomb_matrix.cpp.o
+.PHONY : src/bomb_matrix.cpp.o
+
+src/bomb_matrix.i: src/bomb_matrix.cpp.i
+
+.PHONY : src/bomb_matrix.i
+
+# target to preprocess a source file
+src/bomb_matrix.cpp.i:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/bomb_matrix.cpp.i
+.PHONY : src/bomb_matrix.cpp.i
+
+src/bomb_matrix.s: src/bomb_matrix.cpp.s
+
+.PHONY : src/bomb_matrix.s
+
+# target to generate assembly for a file
+src/bomb_matrix.cpp.s:
+	$(MAKE) -f CMakeFiles/SnakeGame.dir/build.make CMakeFiles/SnakeGame.dir/src/bomb_matrix.cpp.s
+.PHONY : src/bomb_matrix.cpp.s
+
 src/controller.o: src/controller.cpp.o
 
 .PHONY : src/controller.o
@@ -267,6 +294,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... SnakeGame"
 	@echo "... edit_cache"
+	@echo "... src/bomb_matrix.o"
+	@echo "... src/bomb_matrix.i"
+	@echo "... src/bomb_matrix.s"
 	@echo "... src/controller.o"
 	@echo "... src/controller.i"
 	@echo "... src/controller.s"
