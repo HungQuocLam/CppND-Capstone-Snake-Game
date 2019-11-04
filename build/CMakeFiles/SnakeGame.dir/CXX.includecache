@@ -58,6 +58,18 @@ bomb_matrix.h
 elapse_timer.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/elapse_timer.h
 
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/main.cpp
+iostream
+-
+string
+-
+controller.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
+game.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/game.h
+renderer.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.h
+
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.h
 vector
 -

@@ -117,7 +117,7 @@ void Game::Update() {
     if (static_cast<int>(timer2.elapsedSeconds()) > TIMER_ELAPSE){
       snake2.set_moving(true);
       timer2.stop(); 
-      std::cout << "Timer stoped" << "\n";  
+      std::cout << "Timer2 stoped" << "\n";  
     }  
   }
   else{
@@ -127,7 +127,7 @@ void Game::Update() {
         snake2.set_moving(false);
         timer2.start(); 
         snake2.hit_pos = point;
-        std::cout << "Timer started" << "\n";
+        std::cout << "Timer2 started" << "\n";
       }
     }
   }
