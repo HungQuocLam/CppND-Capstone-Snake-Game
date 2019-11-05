@@ -2,6 +2,7 @@
 #define RENDERER_H
 
 #include <vector>
+#include <memory>
 #include "SDL.h"
 #include "snake.h"
 #include "bomb_matrix.h"
@@ -12,7 +13,7 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, SDL_Point const &food);
+  void Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, std :: shared_ptr<SDL_Point> food);
   void UpdateWindowTitle(int score, int score2, int fps);
 
  private:

@@ -73,6 +73,8 @@ renderer.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.h
 vector
 -
+memory
+-
 SDL.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
 snake.h

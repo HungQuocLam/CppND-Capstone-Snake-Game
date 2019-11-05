@@ -9,7 +9,8 @@ Game::Game(std::size_t grid_width, std::size_t grid_height, int bomb_num)
       random_w(0, static_cast<int>(grid_width)-1),
       random_h(0, static_cast<int>(grid_height)-1),
       winner(Snake::Player::kNULL),
-      bomb_m(static_cast<int>(grid_width), static_cast<int>(grid_height), bomb_num) 
+      bomb_m(static_cast<int>(grid_width), static_cast<int>(grid_height), bomb_num),
+      food(std::shared_ptr<SDL_Point>(new SDL_Point())) 
 {
   PlaceFood();
 }
@@ -70,12 +71,12 @@ void Game::PlaceFood() {
       else bomb_check = true;
     }
     if (!snake.SnakeCell(x, y) && !snake2.SnakeCell(x, y) && bomb_check) {
-      food.x = x;
-      food.y = y;
+      food->x = x;
+      food->y = y;
       break;
     }
   }
-  std::cout << "food " << "(" << food.x << "," << food.y << ")" << "\n";
+  std::cout << "food " << "(" << food->x << "," << food->y << ")" << "\n";
 }
 
 void Game::Update() {
@@ -139,7 +140,7 @@ void Game::Update() {
   int new_y2 = static_cast<int>(snake2.head_y);
 
   // Check if there's food over 1st snake 
-  if (food.x == new_x && food.y == new_y) {
+  if (food->x == new_x && food->y == new_y) {
     score++;
     PlaceFood();
     // Grow snake and increase speed.
@@ -147,7 +148,7 @@ void Game::Update() {
     snake.speed += 0.01;
   }
   // Or 2nd snake
-  else if (food.x == new_x2 && food.y == new_y2) {
+  else if (food->x == new_x2 && food->y == new_y2) {
     score2++;
     PlaceFood();
     // Grow snake and increase speed.

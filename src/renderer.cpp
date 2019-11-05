@@ -38,7 +38,7 @@ Renderer::~Renderer() {
   SDL_Quit();
 }
 
-void Renderer::Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, SDL_Point const &food) {
+void Renderer::Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, std :: shared_ptr<SDL_Point> food) {
   SDL_Rect block;
   block.w = screen_width / grid_width;
   block.h = screen_height / grid_height;
@@ -49,8 +49,8 @@ void Renderer::Render(Snake const &snake, Snake const &snake2, Bomb_matrix const
 
   // Render food
   SDL_SetRenderDrawColor(sdl_renderer, 0xFF, 0xCC, 0x00, 0xFF);
-  block.x = food.x * block.w;
-  block.y = food.y * block.h;
+  block.x = food->x * block.w;
+  block.y = food->y * block.h;
   SDL_RenderFillRect(sdl_renderer, &block);
 
   // 1st snake

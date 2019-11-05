@@ -18,7 +18,6 @@ class Game {
   Game(std::size_t grid_width, std::size_t grid_height, int bomb_num);
   void Run(Controller const &controller, Renderer &renderer,
            std::size_t target_frame_duration);
-  
   int GetScore(Snake::Player player) const;
   int GetSize(Snake::Player player) const;
   void Gamewinner();
@@ -30,7 +29,7 @@ class Game {
 
   Bomb_matrix bomb_m; 
 
-  SDL_Point food;
+  std :: shared_ptr<SDL_Point> food;
 
   Elapse_timer timer;
   Elapse_timer timer2;
