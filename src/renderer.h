@@ -13,7 +13,7 @@ class Renderer {
            const std::size_t grid_width, const std::size_t grid_height);
   ~Renderer();
 
-  void Render(Snake const &snake, Snake const &snake2, Bomb_matrix const &bomb_m, std :: shared_ptr<SDL_Point> food);
+  void Render(std::shared_ptr<Snake> snake, std::shared_ptr<Snake> snake2, std::shared_ptr<Bomb_matrix> bomb_m, std :: shared_ptr<SDL_Point> food);
   void UpdateWindowTitle(int score, int score2, int fps);
 
  private:

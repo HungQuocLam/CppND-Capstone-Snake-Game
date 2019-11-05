@@ -24,15 +24,15 @@ class Game {
   Snake::Player winner;
 
  private:
-  Snake snake;
-  Snake snake2;
+  std::shared_ptr<Snake> snake;
+  std::shared_ptr<Snake> snake2;
 
-  Bomb_matrix bomb_m; 
+  std::shared_ptr<Bomb_matrix>  bomb_m; 
 
-  std :: shared_ptr<SDL_Point> food;
+  std::shared_ptr<SDL_Point>    food;
 
-  Elapse_timer timer;
-  Elapse_timer timer2;
+  std::shared_ptr<Elapse_timer> timer;
+  std::shared_ptr<Elapse_timer> timer2;
 
   std::random_device dev;
   std::mt19937 engine;
@@ -41,8 +41,6 @@ class Game {
 
   int score{0};
   int score2{0};
-
-  bool GameOver{false};
 
   void PlaceFood();
   void Update();

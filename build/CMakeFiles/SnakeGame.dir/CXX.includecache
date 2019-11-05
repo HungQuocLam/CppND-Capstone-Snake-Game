@@ -18,7 +18,19 @@ vector
 SDL.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
 
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.cpp
+controller.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
+iostream
+-
+SDL.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
+snake.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/snake.h
+
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
+memory
+-
 snake.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/snake.h
 
@@ -67,6 +79,14 @@ controller.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
 game.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/game.h
+renderer.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.h
+
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.cpp
+iostream
+-
+string
+-
 renderer.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/renderer.h
 
