@@ -25,8 +25,8 @@ class Snake {
   Player player;
 
   float speed{0.1f};
-  int size{1};
-  bool alive{true};
+  int   size{1};
+  bool  alive{true};
   float head_x;
   float head_y;
   
@@ -37,6 +37,7 @@ class Snake {
 
   void set_moving (bool moving);
   bool get_moving (void);
+
  private:
   void UpdateHead();
   void UpdateBody(SDL_Point &current_cell, SDL_Point &prev_cell);

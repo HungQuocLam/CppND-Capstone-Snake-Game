@@ -1,7 +1,7 @@
 
 #include <cmath>
-#include "bomb_matrix.h"
 #include "SDL.h"
+#include "bomb_matrix.h"
 
 Bomb_matrix::Bomb_matrix( int grid_width, int grid_height, int bomb_num)
         :   grid_width(grid_width), 

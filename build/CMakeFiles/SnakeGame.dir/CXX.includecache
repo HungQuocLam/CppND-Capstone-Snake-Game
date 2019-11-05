@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/bomb_matrix.cpp
+cmath
+-
+SDL.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
+bomb_matrix.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/bomb_matrix.h
+
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/bomb_matrix.h
 iostream
 -
@@ -19,12 +27,12 @@ SDL.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
 
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.cpp
-controller.h
-/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
 iostream
 -
 SDL.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/SDL.h
+controller.h
+/home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/controller.h
 snake.h
 /home/ebots/cppnano/Capstone/CppND-Capstone-Snake-Game/src/snake.h
 

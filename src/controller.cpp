@@ -1,6 +1,7 @@
-#include "controller.h"
+
 #include <iostream>
 #include "SDL.h"
+#include "controller.h"
 #include "snake.h"
 
 void Controller::ChangeDirection(std::shared_ptr<Snake> snake, Snake::Direction input,

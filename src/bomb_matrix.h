@@ -11,9 +11,8 @@
 class Bomb_matrix {
     public:
         Bomb_matrix(){std::cout << " Default constructor is called" << "\n";};
-        Bomb_matrix( int grid_width, int grid_height, int bomb_num);
+        Bomb_matrix(int grid_width, int grid_height, int bomb_num);
         
-
         std::vector<SDL_Point> position;
 
         std::random_device dev;

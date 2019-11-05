@@ -25,15 +25,13 @@ int main() {
   std::cout << " Game has terminated successfully! \n";
   std::cout << " Score Snake 1: " << game.GetScore(Snake::Player::kPlayerOne) << "\n";
   std::cout << " Score Snake 2: " << game.GetScore(Snake::Player::kPlayerTwo) << "\n";
-  if (Snake::Player::kNULL != game.winner)
-  {
+  if (Snake::Player::kNULL != game.winner){
     std::cout << " Congratulation to Player " << std::to_string(static_cast<int>(game.winner)) <<" - You are the winner \n";
   }
-  else 
-  {
+  else{
     std::cout << " Game is draw! \n";
   }
- std::cout << "**********************************************************************\n"; 
- std::cout << "**********************************************************************\n"; 
+  std::cout << "**********************************************************************\n"; 
+  std::cout << "**********************************************************************\n"; 
   return 0;
 }
